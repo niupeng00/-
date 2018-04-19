@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qingmei.dao.ArchiveMapper" >
+  <resultMap id="BaseResultMap" type="com.qingmei.entity.Archive" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="archive_no" property="archiveNo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="pin_yin" property="pinYin" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="citizen_no" property="citizenNo" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="site_tree" property="siteTree" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="post_code" property="postCode" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="weixin" property="weixin" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="major" property="major" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="graduate_time" property="graduateTime" jdbcType="VARCHAR" />
+    <result column="certificate" property="certificate" jdbcType="VARCHAR" />
+    <result column="live_city1" property="liveCity1" jdbcType="INTEGER" />
+    <result column="live_city2" property="liveCity2" jdbcType="INTEGER" />
+    <result column="live_city3" property="liveCity3" jdbcType="INTEGER" />
+    <result column="photo_url" property="photoUrl" jdbcType="VARCHAR" />
+    <result column="citizen_photo_url" property="citizenPhotoUrl" jdbcType="VARCHAR" />
+    <result column="education_photo_url" property="educationPhotoUrl" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, archive_no, status, full_name, pin_yin, sex, birthday, nation, native_place, 
+    citizen_no, mobile, site_tree, address, post_code, email, qq, weixin, education, 
+    major, school, graduate_time, certificate, live_city1, live_city2, live_city3, photo_url, 
+    citizen_photo_url, education_photo_url, note, create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qingmei.entity.ArchiveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from archive
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from archive
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from archive
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qingmei.entity.ArchiveExample" >
+    delete from archive
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qingmei.entity.Archive" >
+    insert into archive (ID, archive_no, status, 
+      full_name, pin_yin, sex, 
+      birthday, nation, native_place, 
+      citizen_no, mobile, site_tree, 
+      address, post_code, email, 
+      qq, weixin, education, 
+      major, school, graduate_time, 
+      certificate, live_city1, live_city2, 
+      live_city3, photo_url, citizen_photo_url, 
+      education_photo_url, note, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{archiveNo,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{fullName,jdbcType=VARCHAR}, #{pinYin,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{birthday,jdbcType=DATE}, #{nation,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, 
+      #{citizenNo,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{siteTree,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{weixin,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{major,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, #{graduateTime,jdbcType=VARCHAR}, 
+      #{certificate,jdbcType=VARCHAR}, #{liveCity1,jdbcType=INTEGER}, #{liveCity2,jdbcType=INTEGER}, 
+      #{liveCity3,jdbcType=INTEGER}, #{photoUrl,jdbcType=VARCHAR}, #{citizenPhotoUrl,jdbcType=VARCHAR}, 
+      #{educationPhotoUrl,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qingmei.entity.Archive" >
+    insert into archive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="archiveNo != null" >
+        archive_no,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="pinYin != null" >
+        pin_yin,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="citizenNo != null" >
+        citizen_no,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="siteTree != null" >
+        site_tree,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="postCode != null" >
+        post_code,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="weixin != null" >
+        weixin,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="major != null" >
+        major,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="graduateTime != null" >
+        graduate_time,
+      </if>
+      <if test="certificate != null" >
+        certificate,
+      </if>
+      <if test="liveCity1 != null" >
+        live_city1,
+      </if>
+      <if test="liveCity2 != null" >
+        live_city2,
+      </if>
+      <if test="liveCity3 != null" >
+        live_city3,
+      </if>
+      <if test="photoUrl != null" >
+        photo_url,
+      </if>
+      <if test="citizenPhotoUrl != null" >
+        citizen_photo_url,
+      </if>
+      <if test="educationPhotoUrl != null" >
+        education_photo_url,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="archiveNo != null" >
+        #{archiveNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinYin != null" >
+        #{pinYin,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenNo != null" >
+        #{citizenNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="siteTree != null" >
+        #{siteTree,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateTime != null" >
+        #{graduateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null" >
+        #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="liveCity1 != null" >
+        #{liveCity1,jdbcType=INTEGER},
+      </if>
+      <if test="liveCity2 != null" >
+        #{liveCity2,jdbcType=INTEGER},
+      </if>
+      <if test="liveCity3 != null" >
+        #{liveCity3,jdbcType=INTEGER},
+      </if>
+      <if test="photoUrl != null" >
+        #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenPhotoUrl != null" >
+        #{citizenPhotoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="educationPhotoUrl != null" >
+        #{educationPhotoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qingmei.entity.ArchiveExample" resultType="java.lang.Integer" >
+    select count(*) from archive
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update archive
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.archiveNo != null" >
+        archive_no = #{record.archiveNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.fullName != null" >
+        full_name = #{record.fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pinYin != null" >
+        pin_yin = #{record.pinYin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citizenNo != null" >
+        citizen_no = #{record.citizenNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteTree != null" >
+        site_tree = #{record.siteTree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postCode != null" >
+        post_code = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weixin != null" >
+        weixin = #{record.weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.major != null" >
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateTime != null" >
+        graduate_time = #{record.graduateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificate != null" >
+        certificate = #{record.certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.liveCity1 != null" >
+        live_city1 = #{record.liveCity1,jdbcType=INTEGER},
+      </if>
+      <if test="record.liveCity2 != null" >
+        live_city2 = #{record.liveCity2,jdbcType=INTEGER},
+      </if>
+      <if test="record.liveCity3 != null" >
+        live_city3 = #{record.liveCity3,jdbcType=INTEGER},
+      </if>
+      <if test="record.photoUrl != null" >
+        photo_url = #{record.photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.citizenPhotoUrl != null" >
+        citizen_photo_url = #{record.citizenPhotoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationPhotoUrl != null" >
+        education_photo_url = #{record.educationPhotoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update archive
+    set ID = #{record.id,jdbcType=INTEGER},
+      archive_no = #{record.archiveNo,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=CHAR},
+      full_name = #{record.fullName,jdbcType=VARCHAR},
+      pin_yin = #{record.pinYin,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      citizen_no = #{record.citizenNo,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      site_tree = #{record.siteTree,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      post_code = #{record.postCode,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      weixin = #{record.weixin,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      major = #{record.major,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      graduate_time = #{record.graduateTime,jdbcType=VARCHAR},
+      certificate = #{record.certificate,jdbcType=VARCHAR},
+      live_city1 = #{record.liveCity1,jdbcType=INTEGER},
+      live_city2 = #{record.liveCity2,jdbcType=INTEGER},
+      live_city3 = #{record.liveCity3,jdbcType=INTEGER},
+      photo_url = #{record.photoUrl,jdbcType=VARCHAR},
+      citizen_photo_url = #{record.citizenPhotoUrl,jdbcType=VARCHAR},
+      education_photo_url = #{record.educationPhotoUrl,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qingmei.entity.Archive" >
+    update archive
+    <set >
+      <if test="archiveNo != null" >
+        archive_no = #{archiveNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinYin != null" >
+        pin_yin = #{pinYin,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenNo != null" >
+        citizen_no = #{citizenNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="siteTree != null" >
+        site_tree = #{siteTree,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="weixin != null" >
+        weixin = #{weixin,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null" >
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateTime != null" >
+        graduate_time = #{graduateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="certificate != null" >
+        certificate = #{certificate,jdbcType=VARCHAR},
+      </if>
+      <if test="liveCity1 != null" >
+        live_city1 = #{liveCity1,jdbcType=INTEGER},
+      </if>
+      <if test="liveCity2 != null" >
+        live_city2 = #{liveCity2,jdbcType=INTEGER},
+      </if>
+      <if test="liveCity3 != null" >
+        live_city3 = #{liveCity3,jdbcType=INTEGER},
+      </if>
+      <if test="photoUrl != null" >
+        photo_url = #{photoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="citizenPhotoUrl != null" >
+        citizen_photo_url = #{citizenPhotoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="educationPhotoUrl != null" >
+        education_photo_url = #{educationPhotoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qingmei.entity.Archive" >
+    update archive
+    set archive_no = #{archiveNo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      pin_yin = #{pinYin,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      nation = #{nation,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      citizen_no = #{citizenNo,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      site_tree = #{siteTree,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      weixin = #{weixin,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      graduate_time = #{graduateTime,jdbcType=VARCHAR},
+      certificate = #{certificate,jdbcType=VARCHAR},
+      live_city1 = #{liveCity1,jdbcType=INTEGER},
+      live_city2 = #{liveCity2,jdbcType=INTEGER},
+      live_city3 = #{liveCity3,jdbcType=INTEGER},
+      photo_url = #{photoUrl,jdbcType=VARCHAR},
+      citizen_photo_url = #{citizenPhotoUrl,jdbcType=VARCHAR},
+      education_photo_url = #{educationPhotoUrl,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

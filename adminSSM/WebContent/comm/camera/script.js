@@ -1,0 +1,105 @@
+// JavaScript Document
+$(function(){
+	//loadpic();
+	webcam.set_swf_url('http://iserver.qingmei.co/comm/webcam.swf');
+	//webcam.set_swf_url('/comm/camera/webcam.swf');
+	//webcam.set_api_url('upload.php?a=cp');	// The upload script
+	//webcam.set_api_url('http://iserver.qingmei.co/uploadCamera');
+	//webcam.set_api_url('http://iserver.qingmei.co/upload.php');
+	webcam.set_api_url('http://iserver.qingmei.co/uploadservice?retType=4&projectName='+g_projectName+'&objType=Z');	// The upload script
+	webcam.set_quality(98);				// JPEG Photo Quality
+	webcam.set_shutter_sound(true, '/comm/camera/shutter.mp3');
+	var shootEnabled = false;
+	// Generating the embed code and adding it to the page:	
+	var cam = $("#webcam");
+	cam.html(
+		webcam.get_html(cam.width(), cam.height())
+	);
+	
+	var camera = $("#camera");
+	var shown = false;
+	$('#cam').click(function(){
+		/*
+		if(shown){
+			camera.animate({
+				bottom:-466
+			});
+		}else {
+			camera.animate({
+				bottom:-5
+			},{easing:'easeOutExpo',duration:'slow'});
+		}
+		
+		shown = !shown;*/
+	});
+	
+	$("#btn_shoot").click(function(){
+		if(!shootEnabled){
+			return false;
+		}
+		webcam.freeze();
+		$("#shoot").hide();
+		$("#upload").show();
+		return false;
+	});
+	
+	$('#btn_cancel').click(function(){
+		webcam.reset();
+		$("#shoot").show();
+		$("#upload").hide();
+		return false;
+	});
+	
+	$('#btn_upload').click(function(){
+		webcam.upload();
+		webcam.reset();
+		$("#shoot").show();
+		$("#upload").hide();
+		return false;
+	});
+	
+	camera.find('.settings').click(function(){
+		if(!shootEnabled){
+			return false;
+		}
+		
+		webcam.configure('camera');
+	});
+	webcam.set_hook('onLoad',function(){
+		shootEnabled = true;
+	});
+	webcam.set_hook('onComplete', function(msg){//alert(msg);
+		msg = $.parseJSON(msg);
+		if(msg.ret!='1'){
+			alert("错误");
+		}
+		else {
+			postCallBack(msg);
+		}
+	});
+	
+	webcam.set_hook('onError',function(e){
+		cam.html(e);
+	});
+	
+	
+	function initFancyBox(){
+		$("a[rel=group]").fancybox({
+		    'transitionIn'	: 'elastic',
+		    'transitionOut'	: 'elastic',
+		    'cyclic'        : true
+	    });
+	}
+	
+	function loadpic(){
+		/*$.getJSON("getpic.php",function(json){
+			if(json){
+				$.each(json,function(index,array){ 
+				   var pic = '<a rel="group" href="uploads/'+array['pic']+'"><img src="uploads/small_'+array['pic']+'"></a>';
+                   $("#photos").prepend(pic); 
+                }); 
+			}
+			initFancyBox();
+		});*/
+	}
+});

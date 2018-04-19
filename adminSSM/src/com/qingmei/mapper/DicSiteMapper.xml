@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qingmei.dao.DicSiteMapper" >
+  <resultMap id="BaseResultMap" type="com.qingmei.entity.DicSite" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="description_cut" property="descriptionCut" jdbcType="VARCHAR" />
+    <result column="site_parent" property="siteParent" jdbcType="VARCHAR" />
+    <result column="post_code" property="postCode" jdbcType="VARCHAR" />
+    <result column="sort_no" property="sortNo" jdbcType="INTEGER" />
+    <result column="zone_code" property="zoneCode" jdbcType="VARCHAR" />
+    <result column="first_char" property="firstChar" jdbcType="VARCHAR" />
+    <result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, description, description_cut, site_parent, post_code, sort_no, zone_code, 
+    first_char, area_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qingmei.entity.DicSiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dic_site
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dic_site
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dic_site
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qingmei.entity.DicSiteExample" >
+    delete from dic_site
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qingmei.entity.DicSite" >
+    insert into dic_site (id, code, description, 
+      description_cut, site_parent, post_code, 
+      sort_no, zone_code, first_char, 
+      area_code)
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{descriptionCut,jdbcType=VARCHAR}, #{siteParent,jdbcType=VARCHAR}, #{postCode,jdbcType=VARCHAR}, 
+      #{sortNo,jdbcType=INTEGER}, #{zoneCode,jdbcType=VARCHAR}, #{firstChar,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qingmei.entity.DicSite" >
+    insert into dic_site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="descriptionCut != null" >
+        description_cut,
+      </if>
+      <if test="siteParent != null" >
+        site_parent,
+      </if>
+      <if test="postCode != null" >
+        post_code,
+      </if>
+      <if test="sortNo != null" >
+        sort_no,
+      </if>
+      <if test="zoneCode != null" >
+        zone_code,
+      </if>
+      <if test="firstChar != null" >
+        first_char,
+      </if>
+      <if test="areaCode != null" >
+        area_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionCut != null" >
+        #{descriptionCut,jdbcType=VARCHAR},
+      </if>
+      <if test="siteParent != null" >
+        #{siteParent,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="zoneCode != null" >
+        #{zoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="firstChar != null" >
+        #{firstChar,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qingmei.entity.DicSiteExample" resultType="java.lang.Integer" >
+    select count(*) from dic_site
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dic_site
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descriptionCut != null" >
+        description_cut = #{record.descriptionCut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.siteParent != null" >
+        site_parent = #{record.siteParent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postCode != null" >
+        post_code = #{record.postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortNo != null" >
+        sort_no = #{record.sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.zoneCode != null" >
+        zone_code = #{record.zoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstChar != null" >
+        first_char = #{record.firstChar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode != null" >
+        area_code = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dic_site
+    set id = #{record.id,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      description_cut = #{record.descriptionCut,jdbcType=VARCHAR},
+      site_parent = #{record.siteParent,jdbcType=VARCHAR},
+      post_code = #{record.postCode,jdbcType=VARCHAR},
+      sort_no = #{record.sortNo,jdbcType=INTEGER},
+      zone_code = #{record.zoneCode,jdbcType=VARCHAR},
+      first_char = #{record.firstChar,jdbcType=VARCHAR},
+      area_code = #{record.areaCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qingmei.entity.DicSite" >
+    update dic_site
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="descriptionCut != null" >
+        description_cut = #{descriptionCut,jdbcType=VARCHAR},
+      </if>
+      <if test="siteParent != null" >
+        site_parent = #{siteParent,jdbcType=VARCHAR},
+      </if>
+      <if test="postCode != null" >
+        post_code = #{postCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNo != null" >
+        sort_no = #{sortNo,jdbcType=INTEGER},
+      </if>
+      <if test="zoneCode != null" >
+        zone_code = #{zoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="firstChar != null" >
+        first_char = #{firstChar,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qingmei.entity.DicSite" >
+    update dic_site
+    set code = #{code,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      description_cut = #{descriptionCut,jdbcType=VARCHAR},
+      site_parent = #{siteParent,jdbcType=VARCHAR},
+      post_code = #{postCode,jdbcType=VARCHAR},
+      sort_no = #{sortNo,jdbcType=INTEGER},
+      zone_code = #{zoneCode,jdbcType=VARCHAR},
+      first_char = #{firstChar,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

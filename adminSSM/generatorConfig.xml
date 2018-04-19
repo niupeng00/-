@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+  <classPathEntry location="D:\mysql-connector-java-5.1.30.jar" />
+  <context id="context1" >  
+    <property name="suppressTypeWarnings" value="true" />
+
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+        </commentGenerator>
+        
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/admin_ssh" userId="root" password="1234" />
+    <javaModelGenerator targetPackage="com.qingmei.entity" targetProject="adminSSM" />
+    <sqlMapGenerator targetPackage="com.qingmei.mapper" targetProject="adminSSM" />
+    <javaClientGenerator targetPackage="com.qingmei.dao" targetProject="adminSSM" type="XMLMAPPER" />
+    
+    <table schema="admin_ssh" tableName="admin_log"  >
+    </table>
+    <table schema="admin_ssh" tableName="admin_logtype_code" >
+    </table>
+    <table schema="admin_ssh" tableName="admin_module"  >
+    </table>
+    <table schema="admin_ssh" tableName="admin_role"  >
+    </table>
+    <table schema="admin_ssh" tableName="admin_role_module"  >
+    </table>
+    <table schema="admin_ssh" tableName="admin_user" >
+    </table>
+    <table schema="admin_ssh" tableName="admin_user_role"  >
+    </table>
+    <table schema="admin_ssh" tableName="archive"  >
+    </table>
+    <table schema="admin_ssh" tableName="dic_department"  >
+    </table>
+    <table schema="admin_ssh" tableName="dic_help" >
+    </table>
+    <table schema="admin_ssh" tableName="dic_help_category"  >
+    </table>
+    <table schema="admin_ssh" tableName="dic_site"  >
+    </table>
+    <table schema="admin_ssh" tableName="dic_system"  >
+    </table>
+    
+     
+  </context>
+</generatorConfiguration>

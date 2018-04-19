@@ -1,0 +1,24 @@
+#camera{width:598px; height:525px; position:fixed; bottom:-5px; left:50%; margin-left:-300px; border:1px solid #f0f0f0; background:url(images/cam_bg.jpg) repeat-y; -moz-border-radius:4px 4px 0 0; -webkit-border-radius:4px 4px 0 0; border-radius:4px 4px 0 0; -moz-box-shadow:0 0 4px rgba(0,0,0,0.6); -webkit-box-shadow:0 0 4px rgba(0,0,0,0.6); box-shadow:0 0 4px rgba(0,0,0,0.6);}
+#cam{width:100%; height:66px; display:block; position:absolute; top:0; left:0; background:url(images/cam.png) no-repeat center center; cursor:pointer}
+#webcam{width:520px; height:370px; margin:66px auto 22px; line-height:360px; background:#ccc; color:#666; text-align:center}
+.button_pane{text-align:center;}
+.btn_blue,.btn_green{width:99px; height:38px; line-height:32px; margin:0 4px; border:none; display:inline-block; text-align:center; font-size:14px; color:#fff !important; text-shadow:1px 1px 1px #277c9b; background:url(images/buttons.png) no-repeat}
+.btn_green{background:url(images/buttons.png) no-repeat right top;text-shadow:1px 1px 1px #498917;}
+.hidden{display:none}
+
+#photos{width:80%; margin:40px auto}
+#photos:hover a{opacity:0.5}
+#photos a:hover{opacity:1}
+
+.settings{
+	background:url('images/settings.png') no-repeat;
+	cursor: pointer;
+	height: 28px;
+	position: absolute;
+	right: 37px;
+	top: 448px;
+	width: 30px;
+}
+.settings:hover{
+	background-position:left bottom;
+}
